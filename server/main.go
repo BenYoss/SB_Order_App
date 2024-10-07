@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"path/filepath"
 	"server/internal/repository"
 	"server/internal/routes"
 	"server/internal/storage"
@@ -39,8 +40,14 @@ func main() {
 	}
 
 	storeProductHandler := &routes.StoreProductHandler{Repo: r}
+	app.Static("/", "../client/dist")
+
+	app.Get("/", func(context *fiber.Ctx) error {
+		return context.SendFile(filepath.Join("client", "index.html"))
+	})
 
 	api := app.Group("/api")
+
 	api.Post("/create_store_product", storeProductHandler.CreateStoreProduct)
 	api.Delete("/delete_store_product/:id", storeProductHandler.DeleteStoreProduct)
 	api.Get("/get_store_product/:id", storeProductHandler.GetStoreProductByID)
