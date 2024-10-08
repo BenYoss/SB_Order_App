@@ -1,0 +1,28 @@
+/**------------------------------------------------------------------------
+ **                            REGISTRY STYLES
+ *------------------------------------------------------------------------**/
+
+#registry-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#registry-window {
+    margin: 5vh 20vw 5vh 20vw;
+    padding: 5vh 2vw 5vh 2vw;
+    background-color: map-get($primary-colors, "component-bg");
+}
+
+#registry-header {
+    display: flex;
+    justify-content: center;
+    color: map-get($primary-colors, "component-text");
+}
+
+#registry-body {
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    column-gap: 8%;
+}

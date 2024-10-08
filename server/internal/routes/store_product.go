@@ -53,7 +53,7 @@ func (h *StoreProductHandler) GetStoreProducts(context *fiber.Ctx) error {
 
 func (h *StoreProductHandler) DeleteStoreProduct(context *fiber.Ctx) error {
 
-	id := context.Params("id")
+	id := context.Params("id") //! TODO: Check id type and text to prevent injection.
 
 	if id == "" {
 		context.Status(http.StatusInternalServerError).JSON(&fiber.Map{

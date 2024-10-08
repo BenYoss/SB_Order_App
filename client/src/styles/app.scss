@@ -1,0 +1,26 @@
+/**------------------------------------------------------------------------
+ **                            APP/ROOT STYLE SHEET
+ *------------------------------------------------------------------------**/
+
+@import 'refs.scss';
+
+@import 'toolbar.scss';
+@import 'homepage.scss';
+@import 'landingpage.scss';
+@import 'profile.scss';
+@import 'login.scss';
+@import 'registry.scss';
+@import 'shoppingcart.scss';
+@import 'shoppingitem.scss';
+@import 'shoppinglist.scss';
+
+//* Direct HTML tags edited here 
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+label {
+    color: map-get($primary-colors, 'component-text');
+}

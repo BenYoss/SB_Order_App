@@ -1,0 +1,19 @@
+/**------------------------------------------------------------------------
+ **                            TOOLBAR STYLES
+ *------------------------------------------------------------------------**/
+
+#toolbar-container {
+    display: flex;
+    justify-content: right;
+    row-gap: 8%;
+    width: 100%;
+    background-color: map-get($primary-colors, "component-bg");
+    color:  map-get($primary-colors, "component-text");
+}
+
+#toolbar-anchor {
+    padding: 5px 50px 5px 5px;
+    font-size: x-large;
+    color:  map-get($primary-colors, "component-text");
+    cursor: pointer;
+}

@@ -1,0 +1,32 @@
+/**========================================================================
+ **                            REFERENCES STYLE SHEET
+ *========================================================================**/
+
+/**======================================================================================================================
+ *    The selectors in this file are focused on variables used throughout the files in this project.
+ *================================================================================================**/
+
+
+ //* COLORS 
+
+$primary-colors : ( 
+    "component-bg": #0A2E36,
+     "component-text": #ffff,
+     "component-text-emphasis": #27FB6B,
+     "component-bg-neutral": #14CC60);
+
+//* FONTS
+
+.hdr {
+    color: map-get($primary-colors, "component-text");
+    &.small {
+        font-size: medium;
+    }
+    &.large {
+        font-size: xx-large;
+    }
+    &.emphasis {
+        color: map-get($primary-colors, "component-text-emphasis");
+    }
+    vertical-align: middle;
+}

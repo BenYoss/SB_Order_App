@@ -1,0 +1,29 @@
+/**------------------------------------------------------------------------
+ **                            LOGIN STYLES
+ *------------------------------------------------------------------------**/
+
+#login-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#login-window {
+    margin: 5vh 20vw 5vh 20vw;
+    padding: 5vh 2vw 5vh 2vw;
+    background-color: map-get($primary-colors, "component-bg");
+}
+
+#login-header {
+    display: flex;
+    justify-content: center;
+    color: map-get($primary-colors, "component-text");
+}
+
+#login-body {
+    display: flex;
+    justify-content: space-between;
+    padding: 5% 10% 5% 10%;
+    flex-direction: column;
+    column-gap: 20%;
+}
