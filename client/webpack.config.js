@@ -23,7 +23,7 @@ module.exports = {
             },
             {// Defines css and sass/scss rulesets.
                 test: /\.(css|s[ac]ss)$/,
-                use: ['style-loader', 'sass-loader', 'css-loader'],
+                use: ['style-loader', 'css-loader', 'sass-loader'],
                 exclude: /node_modules/
             }
         ]
