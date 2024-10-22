@@ -11,6 +11,8 @@ import ShoppingCart from './components/ShoppingCart';
 import ShoppingList from './components/ShoppingList';
 import ShoppingItem from './components/ShoppingItem';
 
+import { getUserSession } from './helpers/helperFuncs';
+
 
 import {
     createBrowserRouter,
@@ -25,6 +27,10 @@ import "./styles/app.scss";
 
 const root = createRoot(document.getElementById('root')!);
 
+const session = getUserSession();
+
+
+
 /**=======================
  * *       Router routes for the app.
  *  
@@ -36,7 +42,7 @@ const router = createBrowserRouter([{
 },
 {
     path: '/profile',
-    element: <Profile />
+    element: <Profile session={ session || null } />
 },
 {
     path: '/register',
@@ -44,25 +50,22 @@ const router = createBrowserRouter([{
 },
 {
     path: '/home',
-    element: <HomePage />
+    element: <HomePage session={ session || null } />
 },
 {
     path: '/login',
-    element: <Login />
+    element: <Login session={ session || null } />
 },{
     path: '/browse',
-    element: <ShoppingList />,
+    element: <ShoppingList session={ session || null } />,
 },
 {
     path: '/item',
-    element: <ShoppingItem />
+    element: <ShoppingItem session={ session || null } />
 },
 {
-    path: '/profile',
-    element: <Profile />
-}, {
     path: '/cart',
-    element: <ShoppingCart />
+    element: <ShoppingCart session={ session || null } />
 }
 ])
 

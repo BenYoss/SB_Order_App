@@ -11,9 +11,11 @@
 
 $primary-colors : ( 
     "component-bg": #0A2E36,
-     "component-text": #ffff,
-     "component-text-emphasis": #27FB6B,
-     "component-bg-neutral": #14CC60);
+    "component-text": #ffff,
+    "component-text-inverse": black,
+    "component-text-emphasis": #27FB6B,
+    "component-bg-neutral": #399C4D,
+    "component-bg-vibrant": #C8FFCA);
 
 //* FONTS
 
@@ -22,11 +24,73 @@ $primary-colors : (
     &.small {
         font-size: medium;
     }
+    &.medium {
+        font-size: x-large;
+    }
     &.large {
         font-size: xx-large;
+    }
+    &.giant {
+        font-size: 2.6vw;
     }
     &.emphasis {
         color: map-get($primary-colors, "component-text-emphasis");
     }
     vertical-align: middle;
+}
+
+.product-container {
+    display: flex;
+    flex-direction: column;
+    column-gap: 5%;
+    width: 100%;
+    padding: 1.8vh 0vw 1.8vh 0px;
+    background-color: map-get($primary-colors, "component-bg-vibrant");
+    border: 4px solid map-get($primary-colors, "component-bg-neutral");
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    margin: 0px;
+}
+
+.product-header {
+    background-color: map-get($primary-colors, "component-bg");
+    font-weight: 2vh;
+    justify-content: center;
+    display: flex;
+    vertical-align: middle;
+    padding: 5px 0px 5px 0px;
+}
+
+.product-image {
+    display: flex;
+    justify-content: center;
+    height: 50%;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.product-name {
+    color: map-get($primary-colors, "component-text");
+    font-size: 2.8vh;
+    font-weight:bolder;
+}
+
+.product-price {
+    color: map-get($primary-colors, "component-text-inverse");
+    margin-top:10%;
+    font-size: 3.2vh;
+    font-weight:bolder;
+}
+
+.product-icon {
+    width: 5vw;
+    height: 100%;
 }

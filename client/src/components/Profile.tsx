@@ -1,11 +1,15 @@
-import react from 'react';
+import React from 'react';
 
-import Toolbar from './Toolbar';
+import Toolbar from './toolbar/Toolbar';
 
-export default function Profile() {
+interface ProfileProps {
+    session: string | null
+}
+
+const Profile: React.FC<ProfileProps> = ({ session }) => {
     return (
         <div id="profile-container">
-            <Toolbar />
+            <Toolbar session={session} />
             
             <div id="profile-header">
                 <h1 className="hdr large" id="profile-header-text">
@@ -18,3 +22,5 @@ export default function Profile() {
         </div>
     );
 }
+
+export default Profile;

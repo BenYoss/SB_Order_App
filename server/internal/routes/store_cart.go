@@ -1,30 +1,32 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 	"server/internal/models"
 	"server/internal/repository"
 
-	"strconv"
-
 	"github.com/gofiber/fiber/v2"
 )
 
-type StoreProductHandler struct {
+type StoreCartHander struct {
 	Repo *repository.Repository
 }
 
-func (h *StoreProductHandler) CreateStoreProduct(context *fiber.Ctx) error {
-	var product models.StoreProduct
+type UserProductHandler struct {
+	UserID    string
+	ProductID string
+}
 
-	if err := context.BodyParser(&product); err != nil {
+func (h *StoreCartHander) CreateStoreCart(context *fiber.Ctx) error {
+	var userProduct *UserProductHandler
+
+	if err := context.BodyParser(&userProduct); err != nil {
 		context.Status(http.StatusUnprocessableEntity).JSON(
 			&fiber.Map{"mesage": "request failed"})
 		return err
 	}
 
-	if err := h.Repo.CreateStoreProduct(&product); err != nil {
+	if err := h.Repo.CreateStoreCart(userProduct.UserID, userProduct.ProductID); err != nil {
 		context.Status(http.StatusBadRequest).JSON(
 			&fiber.Map{"message": "could not create product"})
 	}
@@ -35,16 +37,9 @@ func (h *StoreProductHandler) CreateStoreProduct(context *fiber.Ctx) error {
 	return nil
 }
 
-func (h *StoreProductHandler) GetStoreProducts(context *fiber.Ctx) error {
+func (h *StoreCartHander) GetStoreCart(context *fiber.Ctx) error {
 
-	id, err := strconv.ParseInt(context.Params("number"), 0, 16)
-
-	if err != nil {
-		context.Status(http.StatusBadRequest).JSON(
-			&fiber.Map{"message": fmt.Sprintf("%s", err)})
-		return err
-	}
-	products, err := h.Repo.GetStoreProducts(int16(id))
+	products, err := h.Repo.GetStoreCart()
 
 	if err != nil {
 		context.Status(http.StatusBadRequest).JSON(
@@ -61,7 +56,7 @@ func (h *StoreProductHandler) GetStoreProducts(context *fiber.Ctx) error {
 	return nil
 }
 
-func (h *StoreProductHandler) DeleteStoreProduct(context *fiber.Ctx) error {
+func (h *StoreCartHander) DeleteStoreCart(context *fiber.Ctx) error {
 
 	id := context.Params("id") //! TODO: Check id type and text to prevent injection.
 
@@ -72,7 +67,7 @@ func (h *StoreProductHandler) DeleteStoreProduct(context *fiber.Ctx) error {
 		return nil
 	}
 
-	if err := h.Repo.DeleteStoreProduct(id); err != nil {
+	if err := h.Repo.DeleteStoreCart(id); err != nil {
 		context.Status(http.StatusBadRequest).JSON(
 			&fiber.Map{"message": "could not delete product."})
 		return err
@@ -86,8 +81,8 @@ func (h *StoreProductHandler) DeleteStoreProduct(context *fiber.Ctx) error {
 	return nil
 }
 
-func (h *StoreProductHandler) GetStoreProductByID(context *fiber.Ctx) error {
-	var product models.StoreProduct
+func (h *StoreCartHander) GetStoreCartByID(context *fiber.Ctx) error {
+	var product models.StoreCart
 
 	id := context.Params("id")
 
@@ -98,7 +93,7 @@ func (h *StoreProductHandler) GetStoreProductByID(context *fiber.Ctx) error {
 		return nil
 	}
 
-	product, err := h.Repo.GetStoreProductsByID(id)
+	product, err := h.Repo.GetStoreCartByID(id)
 
 	if err != nil {
 		context.Status(http.StatusBadRequest).JSON(
@@ -109,31 +104,8 @@ func (h *StoreProductHandler) GetStoreProductByID(context *fiber.Ctx) error {
 	context.Status(http.StatusOK).JSON(
 		&fiber.Map{
 			"message": "found product successfully.",
-			"data":    product,
+			"data":    &product,
 		})
 
-	return nil
-}
-
-func (h *StoreProductHandler) GetStoreProductsAdvanced(context *fiber.Ctx) error {
-
-	var products []models.StoreProduct
-
-	query := context.Queries()
-	products, err := h.Repo.GetStoreProductsAdvanced(query)
-
-	if err != nil {
-		context.Status(http.StatusBadRequest).JSON(
-			&fiber.Map{
-				"message": "Advanced search failed.",
-				"data":    err,
-			})
-	}
-
-	context.Status(http.StatusOK).JSON(
-		&fiber.Map{
-			"message": "found products.",
-			"data":    products,
-		})
 	return nil
 }

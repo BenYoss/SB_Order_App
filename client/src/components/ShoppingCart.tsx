@@ -1,11 +1,15 @@
-import react from 'react';
+import React from 'react';
 
-import Toolbar from './Toolbar';
+import Toolbar from './toolbar/Toolbar';
 
-export default function ShoppingCart() {
+interface ShoppingCartProps {
+    session: string | null
+}
+
+const ShoppingCart: React.FC<ShoppingCartProps> = ({ session }) => {
     return (
         <div id="shopping-cart-container">
-            <Toolbar />
+            <Toolbar session={session} />
             
             <div id="shopping-cart-header">
                 <h1 className="hdr large" id="shopping-cart-header-text">
@@ -16,3 +20,5 @@ export default function ShoppingCart() {
         </div>
     );
 }
+
+export default ShoppingCart
