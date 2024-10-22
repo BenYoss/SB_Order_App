@@ -22,8 +22,10 @@
 
 #login-body {
     display: flex;
-    justify-content: space-between;
-    padding: 5% 10% 5% 10%;
+    padding: 5% 5% 5% 5%;
+    align-items: center;
+    align-content: space-evenly;
     flex-direction: column;
-    column-gap: 20%;
+    gap: 5px;
+    transform: scale(1.3);
 }

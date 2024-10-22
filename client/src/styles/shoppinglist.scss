@@ -7,3 +7,24 @@
     justify-content: center;
     flex-direction: column;
 }
+
+#shopping-list-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.shopping-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5%;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    padding: 0px;
+}
+
+#shopping-list-item {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}

@@ -1,13 +1,46 @@
 /**------------------------------------------------------------------------
  **                            LANDING PAGE STYLES
  *------------------------------------------------------------------------**/
- 
+
+
+#landing-container {
+    background: url('https://media.gettyimages.com/id/1310633595/video/defocus-wide-community-copy-space.jpg?s=640x640&k=20&c=pSgcCGOteSxAaef6QTd_0bJkuHrK9VUfu9R3VvApNDI=');
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
 #landing-header {
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 50px 0px 50px 0px;
+    margin-top: 5%;
     background-color: map-get($primary-colors, "component-bg");
     column-gap: 10%;
+    opacity: 80%;
+}
+
+#landing-header-text {
+    display: flex;
+    vertical-align: middle;
     flex-direction: column;
+    width: 40vw;
+}
+
+#landing-header-emphasis {
+    margin-left: 0%;
+    margin-right: 0%;
+    vertical-align: middle;
+    display: inline;
+    white-space: nowrap;
+}
+
+.landing-header-text-diag {
+    margin-left: 6%;
+    &.x2 {
+        margin-left: 12%;
+    }
+    &.x3 {
+        margin-left: 18%;
+    }
 }

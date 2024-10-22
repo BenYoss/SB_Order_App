@@ -5,9 +5,33 @@
 #homepage-header {
     display: flex;
     justify-content: center;
+    margin-top:5vh;
     width: 100%;
-    padding: 50px 0px 50px 0px;
-
+    padding: 20px 0px 20px 0px;
+    background-color: map-get($primary-colors, "component-bg");
     column-gap: 10%;
+}
+
+#homepage-body {
+    display: flex;
+    justify-content: center;
     flex-direction: column;
+    column-gap: 10%;
+}
+
+#homepage-body-header {
+    display: flex;
+    justify-content: center;
+}
+
+#homepage-body-text {
+    color: map-get($primary-colors, "component-text-inverse");
+}
+
+#featured-products-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10%;
+    margin: 5vh 15vw 5vh 15vw;
+    flex-direction: row;
 }
