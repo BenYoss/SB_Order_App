@@ -1,0 +1,23 @@
+#searchbar-container {
+    display: flex;
+    flex-direction: row;
+
+    width: fit-content;
+    margin: 0vw 18vw 0vw 5vw;
+    transform: scale(1.2);
+}
+
+#searchbar-form {
+    display: flex;
+    padding: 3vh 0vw 3vh 0vw;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#searchbar {
+    width: 100%;
+}
+
+#searchbar-form-submit {
+    cursor: pointer;
+}
