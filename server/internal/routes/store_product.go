@@ -1,9 +1,12 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 	"server/internal/models"
 	"server/internal/repository"
+
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -34,7 +37,14 @@ func (h *StoreProductHandler) CreateStoreProduct(context *fiber.Ctx) error {
 
 func (h *StoreProductHandler) GetStoreProducts(context *fiber.Ctx) error {
 
-	products, err := h.Repo.GetStoreProducts()
+	id, err := strconv.ParseInt(context.Params("number"), 0, 16)
+
+	if err != nil {
+		context.Status(http.StatusBadRequest).JSON(
+			&fiber.Map{"message": fmt.Sprintf("%s", err)})
+		return err
+	}
+	products, err := h.Repo.GetStoreProducts(int16(id))
 
 	if err != nil {
 		context.Status(http.StatusBadRequest).JSON(
@@ -99,8 +109,31 @@ func (h *StoreProductHandler) GetStoreProductByID(context *fiber.Ctx) error {
 	context.Status(http.StatusOK).JSON(
 		&fiber.Map{
 			"message": "found product successfully.",
-			"data":    &product,
+			"data":    product,
 		})
 
+	return nil
+}
+
+func (h *StoreProductHandler) GetStoreProductsAdvanced(context *fiber.Ctx) error {
+
+	var products []models.StoreProduct
+
+	query := context.Queries()
+	products, err := h.Repo.GetStoreProductsAdvanced(query)
+
+	if err != nil {
+		context.Status(http.StatusBadRequest).JSON(
+			&fiber.Map{
+				"message": "Advanced search failed.",
+				"data":    err,
+			})
+	}
+
+	context.Status(http.StatusOK).JSON(
+		&fiber.Map{
+			"message": "found products.",
+			"data":    products,
+		})
 	return nil
 }
