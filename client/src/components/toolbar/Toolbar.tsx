@@ -3,7 +3,7 @@ import {
     Link
 } from 'react-router-dom';
 
-import icon from './southbalanceLogo.png';
+import icon from '../../img/southbalanceLogo.png';
 import Searchbar from './Searchbar';
 
 interface ToolbarProps {
