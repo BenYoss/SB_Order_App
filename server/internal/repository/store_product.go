@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"server/internal/models"
 	"strconv"
+	"strings"
 
 	"gorm.io/gorm"
 )
@@ -89,4 +90,13 @@ func (r *Repository) DeleteStoreProduct(id string) error {
 	err := r.DB.Raw("CALL delete_product_sp(?)", id).Scan(&product).Error
 
 	return err
+}
+
+func (r *Repository) GetStoreProductColors(name string) ([]models.StoreProduct, error) {
+	var products []models.StoreProduct
+
+	parsedName := strings.ReplaceAll(name, "%20", " ")
+
+	err := r.DB.Raw("SELECT * FROM store_product WHERE product_name = ?", parsedName).Scan(&products).Error
+	return products, err
 }

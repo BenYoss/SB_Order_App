@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Toolbar from './toolbar/Toolbar';
+import Footer from './toolbar/Footer';
 
 interface ProfileProps {
     session: string | null
@@ -19,6 +20,7 @@ const Profile: React.FC<ProfileProps> = ({ session }) => {
             <div id="profile-body">
 
             </div>
+            <Footer />
         </div>
     );
 }

@@ -4,6 +4,7 @@ import Toolbar from './toolbar/Toolbar';
 
 import { getProductsFromSearch } from '../helpers/apiHelpers';
 import ProductSmall from './product/ProductSmall';
+import Footer from './toolbar/Footer';
 
 interface ShoppingListProps {
     session: string | null
@@ -29,6 +30,9 @@ const ShoppingList: React.FC<ShoppingListProps> = ({ session }) => {
 
 
     useEffect(() => {
+        if (!session) {
+            window.location.href = '/';
+        }
         const url = new URL(window.location.href);
         const queryParams = Object.fromEntries(url.searchParams.entries());
         if (!products.length) {
@@ -66,6 +70,7 @@ const ShoppingList: React.FC<ShoppingListProps> = ({ session }) => {
                         }
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

@@ -15,10 +15,6 @@ const Searchbar: React.FC<SearchbarInterface> = ({  }) => {
 
     const [query, setQuery] = useState('');
 
-    useEffect(() => {
-        //! TODO: Advanced querying.
-    }, [])
-
     const handleQueryChange = (_event: React.ChangeEvent<HTMLInputElement>) => {
         const value = _event.target.value;
 

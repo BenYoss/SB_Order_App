@@ -14,6 +14,7 @@
 @import 'shoppingitem.scss';
 @import 'shoppinglist.scss';
 @import 'searchbar.scss';
+@import 'footer.scss';
 
 //* Direct HTML tags edited here 
 body {
@@ -24,4 +25,11 @@ body {
 
 label {
     color: map-get($primary-colors, 'component-text');
+    &.label-light {
+        color: map-get($primary-colors, 'component-text-inverse');
+    }
+}
+
+input {
+    
 }

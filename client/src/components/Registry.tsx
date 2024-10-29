@@ -3,6 +3,7 @@ import react, {useState, useEffect}from 'react';
 import Toolbar from './toolbar/Toolbar';
 
 import { createUser } from '../helpers/apiHelpers';
+import Footer from './toolbar/Footer';
 
 interface UserInterface {
     username: string,
@@ -92,7 +93,7 @@ export default function Registry() {
      *
      *=============================================**/
     return (
-        <div id="registry-container">
+        <div id="registry-container" className='page'>
             <Toolbar session={null} />
             
             <div id="registry-window">
@@ -111,25 +112,10 @@ export default function Registry() {
                     <input type="text" id="phone" onChange={handleUserInformation} value={userInformation.phone}/>
                     <label className="label-st" id="password">Password:</label>
                     <input type="text" id="password" onChange={handleUserInformation} value={userInformation.password}/>
-                    <label className="label-st" id="confirm-password">Confirm Password:</label>
-                    <input type="text" id="confirm" onChange={handleUserInformation} value={userInformation.confirm}/>
-                    <label className="label-st" id="street">Street:</label>
-                    <input type="text" id="street" onChange={handleUserInformation} value={userInformation.street}/>
-                    <label className="label-st" id="city">City:</label>
-                    <input type="text" id="city" onChange={handleUserInformation} value={userInformation.city}/>
-                    <label className="label-st" id="zip">Zip:</label>
-                    <input type="text" id="zip" onChange={handleUserInformation} value={userInformation.zip}/>
-                    <label className="label-st" id="country">Country:</label>
-                    <input type="text" id="country" onChange={handleUserInformation} value={userInformation.country}/>
-                    <label className="label-st" id="credit-card-number">Credit Card Number:</label>
-                    <input type="text" id="credit" onChange={handleUserInformation} value={userInformation.credit}/>
-                    <label className="label-st" id="card-expiry">Expiration Date:</label>
-                    <input type="text" id="card" onChange={handleUserInformation} value={userInformation.card}/>
-                    <label className="label-st" id="credit-card-type">Type:</label>
-                    <input type="text" id="creditType" onChange={handleUserInformation} value={userInformation.creditType}/>
-                    <button type="submit">Register</button>
+                    <button className="btn light" type="submit">Register</button>
                 </form>
             </div>
+            <Footer />
         </div>
     );
 }

@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 	"server/internal/models"
 	"server/internal/repository"
@@ -20,7 +21,7 @@ func (h *PaymentMethodHandler) CreatePaymentMethod(context *fiber.Ctx) error {
 			&fiber.Map{"mesage": "request failed"})
 		return err
 	}
-
+	fmt.Println(payment)
 	if err := h.Repo.CreatePaymentMethod(&payment); err != nil {
 		context.Status(http.StatusBadRequest).JSON(
 			&fiber.Map{"message": "could not create payment"})

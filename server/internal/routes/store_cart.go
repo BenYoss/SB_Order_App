@@ -19,7 +19,6 @@ type UserProductHandler struct {
 
 func (h *StoreCartHander) CreateStoreCart(context *fiber.Ctx) error {
 	var userProduct *UserProductHandler
-
 	if err := context.BodyParser(&userProduct); err != nil {
 		context.Status(http.StatusUnprocessableEntity).JSON(
 			&fiber.Map{"mesage": "request failed"})
@@ -29,8 +28,8 @@ func (h *StoreCartHander) CreateStoreCart(context *fiber.Ctx) error {
 	if err := h.Repo.CreateStoreCart(userProduct.UserID, userProduct.ProductID); err != nil {
 		context.Status(http.StatusBadRequest).JSON(
 			&fiber.Map{"message": "could not create product"})
+		return err
 	}
-
 	context.Status(http.StatusOK).JSON(&fiber.Map{
 		"message": "product has been added!"})
 
@@ -58,16 +57,17 @@ func (h *StoreCartHander) GetStoreCart(context *fiber.Ctx) error {
 
 func (h *StoreCartHander) DeleteStoreCart(context *fiber.Ctx) error {
 
-	id := context.Params("id") //! TODO: Check id type and text to prevent injection.
+	userID := context.Query("userID")
+	productID := context.Query("productID")
 
-	if id == "" {
+	if userID == "" || productID == "" {
 		context.Status(http.StatusInternalServerError).JSON(&fiber.Map{
 			"message": "id cannot be empty.",
 		})
 		return nil
 	}
 
-	if err := h.Repo.DeleteStoreCart(id); err != nil {
+	if err := h.Repo.DeleteStoreCart(userID, productID); err != nil {
 		context.Status(http.StatusBadRequest).JSON(
 			&fiber.Map{"message": "could not delete product."})
 		return err
@@ -82,7 +82,7 @@ func (h *StoreCartHander) DeleteStoreCart(context *fiber.Ctx) error {
 }
 
 func (h *StoreCartHander) GetStoreCartByID(context *fiber.Ctx) error {
-	var product models.StoreCart
+	var product []models.StoreCart
 
 	id := context.Params("id")
 
@@ -92,7 +92,6 @@ func (h *StoreCartHander) GetStoreCartByID(context *fiber.Ctx) error {
 		})
 		return nil
 	}
-
 	product, err := h.Repo.GetStoreCartByID(id)
 
 	if err != nil {

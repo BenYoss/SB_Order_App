@@ -4,7 +4,6 @@
 
 #registry-container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
 }
 
@@ -25,4 +24,6 @@
     justify-items: center;
     flex-direction: column;
     column-gap: 8%;
+    align-items: center;
+    transform: scale(1.2);
 }

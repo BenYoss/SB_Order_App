@@ -1,10 +1,11 @@
 import react from 'react';
 
 import Toolbar from './toolbar/Toolbar';
+import Footer from './toolbar/Footer';
 
 export default function LandingPage() {
     return (
-        <div id="landing-container">
+        <div className="page" id="landing-container">
             <Toolbar session={null} />
             
             <div id="landing-header">
@@ -23,6 +24,7 @@ export default function LandingPage() {
                 </h1>
             </div>
             <div id="landing-body"></div>
+            <Footer />
         </div>
     );
 }

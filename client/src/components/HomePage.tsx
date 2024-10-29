@@ -7,6 +7,7 @@ import ProductSmall from './product/ProductSmall';
 import { HomepageInterfaceProduct, HomepageInterfaceUser } from '../interfaces/homepageInterface';
 
 import { getUserInfo, getProducts } from '../helpers/apiHelpers';
+import Footer from './toolbar/Footer';
 
 interface HomePageProps {
     session: string | null
@@ -22,6 +23,9 @@ const HomePage: React.FC<HomePageProps> = ({ session }) => {
     const [productInfo, setProductInfo] = useState<HomepageInterfaceProduct[]>();
 
     useEffect(() => {
+        if (!session) {
+            window.location.href = '/';
+        }
         if (!userInfo.username.length && typeof session == 'string') {
             getUserInfo(session)
             .then(({ username, id }) => {
@@ -73,6 +77,7 @@ const HomePage: React.FC<HomePageProps> = ({ session }) => {
                     }
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

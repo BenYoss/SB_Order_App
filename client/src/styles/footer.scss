@@ -1,0 +1,15 @@
+#footer-container {
+    position:relative;
+    bottom: 0;
+}
+
+#footer-header {
+    display: flex;
+    justify-content: center;
+    background-color: map-get($primary-colors, "component-bg");
+    margin-top: 0vh;
+}
+
+#footer-text {
+    color: map-get($primary-colors, "component-text");
+}
