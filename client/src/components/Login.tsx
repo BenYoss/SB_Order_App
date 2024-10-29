@@ -5,6 +5,7 @@ import Toolbar from './toolbar/Toolbar';
 import { decryptPassword } from '../helpers/apiHelpers';
 
 import { LoginInterface } from '../interfaces/loginInterface';
+import Footer from './toolbar/Footer';
 
 interface LoginProps {
     session: string | null
@@ -60,24 +61,25 @@ const Login: React.FC<LoginProps> = ({ session }) => {
     };
 
     return (
-        <div id="login-container">
+        <div id="login-container" className="page">
             <Toolbar session={ session } />
             <div id="login-window">
                 <div id="login-header">
                     <h1 className="hdr large" id="login-header-text">
-                        Login
+                        Login to South Balance
                     </h1>
                 </div>
                 <br />
-                {/* #! TODO: add login information functionality  */}
+                {/* #! TODO: encrypt login information in Base64  */}
                 <form onSubmit={handleLoginSubmit} id="login-body">
                     <label className="label-st" id="login-username">Username:</label>
                     <input type="text" id="username" onChange={handleLoginFormUpdate} value={loginInfo.username} />
                     <label className="label-st" id="login-password">Password:</label>
-                    <input type="text" id="password" onChange={handleLoginFormUpdate} value={loginInfo.password} />
-                    <button type="submit">Login</button>
+                    <input type="password" id="password" onChange={handleLoginFormUpdate} value={loginInfo.password} />
+                    <button className="btn light" type="submit">Login</button>
                 </form>
             </div>
+            <Footer />
         </div>
     );
 }
