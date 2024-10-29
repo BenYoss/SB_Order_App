@@ -57,6 +57,7 @@ func main() {
 	api.Get("/get_store_product/:id", storeProductHandler.GetStoreProductByID)
 	api.Get("/store_product/:number", storeProductHandler.GetStoreProducts)
 	api.Get("/store_product_search", storeProductHandler.GetStoreProductsAdvanced)
+	api.Get("/store_product_colors/:id", storeProductHandler.GetStoreProductColors)
 
 	//* USER ROUTES
 	api.Post("/create_user", userHandler.CreateUser)
@@ -66,7 +67,7 @@ func main() {
 
 	//* STORE CART ROUTES
 	api.Post("/create_store_cart", storeCartHandler.CreateStoreCart)
-	api.Delete("/delete_store_cart/:id", storeCartHandler.DeleteStoreCart)
+	api.Delete("/delete_store_cart", storeCartHandler.DeleteStoreCart)
 	api.Get("/get_store_cart/:id", storeCartHandler.GetStoreCartByID)
 	api.Get("/store_cart", storeCartHandler.GetStoreCart)
 
