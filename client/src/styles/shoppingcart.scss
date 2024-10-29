@@ -4,6 +4,207 @@
 
 #shopping-cart-container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
 }
+
+#shopping-cart-header{
+    background-color: map-get($primary-colors, 'component-bg');
+    margin-top: 4vh;
+}
+
+#shopping-cart-body {
+    display: grid;
+    grid-template-columns: 1.8fr 2fr;
+    gap: 10%;
+    transform: scale(0.9);
+}
+
+.cart-item-container {
+    display: grid;
+    gap: 20%;
+    grid-template-columns: 1fr 2fr 1fr;
+    margin: 2vh 1vw 0vh 0vw;
+}
+
+.cart-item-header {
+    width: 100%;
+    border: solid 1px gray;
+}
+
+.cart-item-body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.cart-item-body-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: map-get($primary-colors,'component-bg');
+}
+
+.cart-item-image {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+.cart-item-header-txt {
+    font-size: 2vh;
+    font-weight: 600;
+    color: map-get($primary-colors,'component-text');
+    align-items: center;
+    vertical-align: middle;
+    padding: 0px 10px 0px 10px;
+}
+
+.delete-cart-item {
+    width: 100%;
+    height: fit-content;
+    background-color: red;
+    cursor: pointer;
+    align-items: center;
+}
+
+.delete-cart-item:hover {
+    background-color: pink;
+}
+
+.cart-item-spinner {
+    margin: 5% 5% 5% 0px;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.spinner-text {
+    width: 3vw;
+    text-align: center;
+    font-size: 1.8vw;
+    font-weight: 400;
+    vertical-align: middle;
+    border: 0;
+    border-radius: 20px;
+}
+
+.spinner-increase, .spinner-decrease {
+    margin: 0;
+}
+
+#shopping-cart-empty-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin: 10vh 0vw 15vh 0vw;
+}
+
+#shopping-cart-empty {
+    font-size: 1.7vw;
+    font-weight: 500;
+    color: map-get($neutral_colors, "component-text-light" );
+    text-align: center;
+}
+
+#shopping-cart-empty-header {
+    font-size: 2.5vw;
+    font-weight: 800;
+    color: map-get($neutral_colors, "component-text-light" );
+    text-align: center;
+}
+
+#empty-cart-icon {
+    width: 10%;
+    height: 10%;
+    object-fit: contain;
+    align-self: center;
+}
+
+#item-column-3 {
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+}
+
+#shopping-cart-confirm {
+    display: grid;
+    grid-template-rows: 0.1fr 1fr 0.3fr;
+}
+
+.shopping-cart-price {
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 60%;
+    height: 100%;
+}
+
+#shipping-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#shipping-form-header, #transaction-form-header {
+    display: flex;
+    justify-content: center;
+    background-color: map-get($primary-colors, "component-bg");
+    color: map-get($primary-colors, "component-text");
+    border-radius: 10px;
+}
+
+#shipping-form-body, #transaction-form-body {
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px 5vw 20px 5vw;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+}
+
+#order-summary-container, #transaction-form-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1vw;
+}
+
+#order-summary-body, #transaction-form-body {
+    display: flex;
+    justify-items: center;
+    vertical-align: bottom;
+    flex-direction: column;
+    min-height: 25vh;
+}
+
+.summary-element, .form-element {
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+#order-summary-footer, #transaction-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+#order-summary-confirm-btn, #transaction-confirm-btn {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    transform: scale(1.2);
+    width: fit-content;
+    margin-left: 3.8vw;
+}
+
+.order-summary-total, .transaction-total {
+    color: map-get($primary-colors, "component-bg-neutral" );
+    font-size: 2vw;
+    font-weight: 600;
+}
+
+#order-back-btn, #order-submit-btn {
+    border-radius: 20px;
+    max-height: 40px;
+}
+
+
