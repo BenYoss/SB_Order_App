@@ -137,3 +137,28 @@ func (h *StoreProductHandler) GetStoreProductsAdvanced(context *fiber.Ctx) error
 		})
 	return nil
 }
+
+func (h *StoreProductHandler) GetStoreProductColors(context *fiber.Ctx) error {
+	var products []models.StoreProduct
+
+	id := context.Params("id")
+
+	products, err := h.Repo.GetStoreProductColors(id)
+
+	if err != nil {
+		context.Status(http.StatusInternalServerError).JSON(
+			&fiber.Map{
+				"message": "Product nil.",
+				"data":    err,
+			},
+		)
+	}
+	context.Status(http.StatusOK).JSON(
+		&fiber.Map{
+			"message": "Products returned.",
+			"data":    &products,
+		},
+	)
+
+	return nil
+}
