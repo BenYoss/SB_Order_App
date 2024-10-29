@@ -66,7 +66,7 @@ export async function getProductsFromSearch (
 }
 
 export async function getFeaturedProduct (username: string) {
-
+    //! TODO: Next steps for additional featuring.
 }
 
 export async function getProductByID (id: string) {
@@ -77,7 +77,76 @@ export async function getProductByID (id: string) {
     .catch(err => console.error(err));
 }
 
+export async function getColorsOfProduct(productName: string) {
+    return await axios.get(`api/store_product_colors/${productName}`)
+    .then(({ data }) => {
+        return data.data;
+    })
+    .catch((err) => console.error(err));
+}
 
+export async function addProductToCart(userID: string, productID: string) {
+    return await axios.post('/api/create_store_cart',
+        {userID: userID,
+        productID: productID})
+    .then(() => {})
+    .catch(err => console.error(err));
+}
+
+export async function getCart(userID: string) {
+    const cartInfo = await axios.get(`api/get_store_cart/${userID}`).catch((err) => console.error(err));
+
+    return cartInfo;
+}
+
+export async function deleteCartItem(userID: string, productID: string) {
+    await axios.delete(`api/delete_store_cart?userID=${userID}&productID=${productID}`).catch(err => console.error(err));
+}
+
+export async function createPaymentInfo(userID: string, cardNumber: string, expiry: string, cardType: string) {
+    return await axios.post('/api/create_payment_method',
+        {
+            user_id: userID,
+            card_number: cardNumber,
+            exp_date: expiry,
+            card_type: cardType
+        }
+    )
+    .then(({data}) => {
+        return data.data;
+    })
+    .catch((err) => console.error(err));
+}
+
+export async function createTransaction(paymentID: string, shippingAddress: string, shippingCity: string, shippingState: string, shippingZip: string, taxRate = 1.2) {
+    return await axios.post('/api/create_transaction',
+        {
+            paymentID: paymentID,
+            shippingAddress: shippingAddress,
+            shippingCity: shippingCity,
+            shippingState: shippingState,
+            shippingZip: shippingZip,
+            taxRate: taxRate
+        }
+    )
+    .then(({data}) => {
+        return data.data;
+    }).catch((err) => console.error(err));
+}
+
+export async function createTransactionProduct(transactionID: string, productID: string, productAmount: number, productTotal: number) {
+    await axios.post('/api/create_transaction_product',
+        {
+            transactionID: transactionID,
+            productID: productID,
+            productAmount: productAmount,
+            productTotal: productTotal,
+        }
+    )
+    .then(({data}) => {
+        return data.data;
+    }).catch((err) => console.error(err));
+}
 
 module.exports = {
     createUser,
@@ -85,5 +154,12 @@ module.exports = {
     getProducts,
     getUserInfo,
     getProductsFromSearch,
-    getProductByID
+    getProductByID,
+    getColorsOfProduct,
+    addProductToCart,
+    getCart,
+    deleteCartItem,
+    createTransaction,
+    createTransactionProduct,
+    createPaymentInfo
 }
