@@ -5,19 +5,18 @@ import (
 )
 
 func (r *Repository) CreatePaymentMethod(PaymentMethod *models.PaymentMethod) error {
+
 	return r.DB.Raw(`
 	CALL add_payment_method_sp(
-		?,
 		?,
 		?,
 		?,
 		?
 	)`,
 		PaymentMethod.UserID,
-		PaymentMethod.CardNumber,
 		PaymentMethod.CardType,
-		PaymentMethod.ExpDate,
-		PaymentMethod.DateChanged).Scan(&PaymentMethod).Error
+		PaymentMethod.CardNumber,
+		PaymentMethod.ExpDate).Scan(&PaymentMethod).Error
 }
 
 func (r *Repository) GetPaymentMethod() ([]models.PaymentMethod, error) {
