@@ -18,7 +18,7 @@ const ProductSmall: React.FC<ProductSmallProps> = ({ productID, productName, pro
                 <img src={productImageURL} alt="Image of product" className="product-icon" />
             </div>
             <div className="product-header">
-                <Link to={`/item/?id=${productID}`}>
+                <Link to={`/item?id=${productID}`}>
                     <span className="product-name">
                         {productName}
                     </span>
