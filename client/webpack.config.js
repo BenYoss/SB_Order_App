@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     // Defines the entry point of the codebase compiled into a bundle.
-    entry: ['regenerator-runtime/runtime.js', path.resolve('./src/Index.tsx')],
+    entry: path.resolve('./src/Index.tsx'),
 
     // Defines the exit point for bundle to reside.
     output: {
