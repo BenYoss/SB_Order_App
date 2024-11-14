@@ -5,18 +5,20 @@
 #login-container {
     display: flex;
     flex-direction: column;
+    background: map-get($complex-colors, "component-bg-gn-gn" );
 }
 
 #login-window {
-    margin: 5vh 20vw 5vh 20vw;
-    padding: 5vh 2vw 5vh 2vw;
-    background-color: map-get($primary-colors, "component-bg");
+    margin: 5vh 25vw 5vh 25vw;
+    padding: 1vh 2vw 8vh 2vw;
+    background-color: map-get($primary-colors, "component-text");
+    border-radius: 15px;
 }
 
 #login-header {
     display: flex;
     justify-content: center;
-    color: map-get($primary-colors, "component-text");
+    color: map-get($primary-colors, "component-text-inverse");
 }
 
 #login-body {

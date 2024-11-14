@@ -27,7 +27,7 @@ const OrderSummary: React.FC<OrderSummaryInterface> = ({ cart, quantities }) => 
             cart.map((element: ShoppingCartItem, index: number) => {
                 
                 const totalAmount = parseFloat((parseFloat(element.price) * (quantities[element.product_id] || 1)).toFixed(2));
-                console.log(quantities);
+
                 totalSum = parseFloat((totalSum + totalAmount).toFixed(2));
 
                 const result: OrderInterface = {

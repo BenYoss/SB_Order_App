@@ -30,27 +30,27 @@ const ShippingForm: React.FC<ShippingFormInterface> = ({ setShippingForm }) => {
             <div id="shipping-form-body">
                 <div className="form-element">
                     <label htmlFor="" className="label-light" id="address">Address:</label>
-                    <input type="text" onChange={handleShippingChange} id="shipping_address" />
+                    <input className="form-input large" type="text" onChange={handleShippingChange} id="shipping_address" />
                 </div>
                 
                 <div className="form-element">
                     <label htmlFor="" className="label-light" id="address">Country:</label>
-                    <input type="text" onChange={handleShippingChange} id="shipping_country" />
+                    <input className="form-input large" type="text" onChange={handleShippingChange} id="shipping_country" />
                 </div>
                 
                 <div className="form-element">
                     <label htmlFor="" className="label-light" id="address">State:</label>
-                    <input type="text" onChange={handleShippingChange} id="shipping_state" />
+                    <input className="form-input large" type="text" onChange={handleShippingChange} id="shipping_state" />
                 </div>
                 
                 <div className="form-element">
                     <label htmlFor="" className="label-light" id="address">City:</label>
-                    <input type="text" onChange={handleShippingChange} id="shipping_city" />
+                    <input className="form-input large" type="text" onChange={handleShippingChange} id="shipping_city" />
                 </div>
                 
                 <div className="form-element">
                     <label htmlFor="" className="label-light" id="address">Zip:</label>
-                    <input type="text" onChange={handleShippingChange} id="shipping_zip" />
+                    <input type="text" className="form-input large" onChange={handleShippingChange} id="shipping_zip" />
                 </div>
             </div>
         </div>

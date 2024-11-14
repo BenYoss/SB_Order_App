@@ -51,7 +51,7 @@ const HomePage: React.FC<HomePageProps> = ({ session }) => {
     }, [userInfo]);
 
     return (
-        <div id="homepage-container">
+        <div id="homepage-container" className='page'>
             <Toolbar session={session} />
             
             <div id="homepage-header">

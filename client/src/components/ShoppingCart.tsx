@@ -50,8 +50,6 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ session }) => {
     const orderItem = async () => {
         let transactionInfo;
         let paymentInfo;
-
-        console.log(transactionForm);
         
         paymentInfo = await createPaymentInfo(userID, transactionForm.card_number, transactionForm.exp_date, transactionForm.type)
         .catch(err => console.error(err));

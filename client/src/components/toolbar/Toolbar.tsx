@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Link
 } from 'react-router-dom';
@@ -6,15 +6,25 @@ import {
 import icon from '../../img/southbalanceLogo.png';
 import Searchbar from './Searchbar';
 
+import ProfileDrawer from '../profile/ProfileDrawer';
+
 interface ToolbarProps {
     session: string | null
 }
 
+const productCategories = [];
 
 const Toolbar: React.FC<ToolbarProps> = ({ session }) => {
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     
     return (
         <div id="toolbar-container">
+                    {
+                        isOpen && (
+                            <ProfileDrawer />
+                        )
+                    }
             {!session ? (
                 <>
                     <Link to="/">
@@ -40,9 +50,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ session }) => {
                         <h1 className="toolbar-anchor">My Cart</h1>
                     </Link>
 
-                    <Link to="/profile">
-                        <h1 className="toolbar-anchor">My Profile</h1>
-                    </Link>
+                    <h1 className="toolbar-anchor" onClick={() => setIsOpen(!isOpen)}>My Profile</h1>
                 </>}
         </div>
     );

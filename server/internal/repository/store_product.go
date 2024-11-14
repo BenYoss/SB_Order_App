@@ -100,3 +100,11 @@ func (r *Repository) GetStoreProductColors(name string) ([]models.StoreProduct, 
 	err := r.DB.Raw("SELECT * FROM store_product WHERE product_name = ?", parsedName).Scan(&products).Error
 	return products, err
 }
+
+func (r *Repository) GetProductCategories() ([]string, error) {
+	var categories []string
+
+	err := r.DB.Raw("SELECT get_all_product_categories()").Scan(&categories).Error
+
+	return categories, err
+}
