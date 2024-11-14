@@ -162,3 +162,26 @@ func (h *StoreProductHandler) GetStoreProductColors(context *fiber.Ctx) error {
 
 	return nil
 }
+
+func (h *StoreProductHandler) GetProductCategories(context *fiber.Ctx) error {
+
+	var categories []string
+
+	categories, err := h.Repo.GetProductCategories()
+
+	if err != nil {
+		context.Status(http.StatusExpectationFailed).JSON(
+			&fiber.Map{
+				"message": "Could not retrieve categories from database.",
+				"data":    err,
+			})
+	}
+
+	context.Status(http.StatusOK).JSON(
+		&fiber.Map{
+			"message": "Retrieved product categories.",
+			"data":    categories,
+		})
+
+	return nil
+}

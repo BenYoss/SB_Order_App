@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+import { getProductCategories } from '../../helpers/apiHelpers';
+
+
 interface SearchbarInterface {
 
 }
@@ -14,6 +17,16 @@ const Searchbar: React.FC<SearchbarInterface> = ({  }) => {
     const [filter, setFilter] = useState('');
 
     const [query, setQuery] = useState('');
+
+    const [productCategories, setProductCategories] = useState<void | string[]>([]);
+
+    useEffect(() => {
+        if (productCategories && !productCategories.length) {
+            getProductCategories().then((data) => {
+                setProductCategories(data);
+            });
+        }
+    }, []);
 
     const handleQueryChange = (_event: React.ChangeEvent<HTMLInputElement>) => {
         const value = _event.target.value;
@@ -39,8 +52,11 @@ const Searchbar: React.FC<SearchbarInterface> = ({  }) => {
             <form onSubmit={submitQuery} id="searchbar-form">
                 <select id="searchbar-dropdown" onChange={handleFilterChange}>
                     <option value="">Filters</option>
-                    <option value="Water Bottle">Water Bottle</option>
-                    <option value="Electronics">Electronics</option>
+                    {
+                        productCategories && productCategories.length > 0 ? productCategories.map((element) => (
+                            <option value={element}>{element}</option>
+                        )) : null
+                    }
                 </select>
                 <br />
                 <input type="text" value={query} placeholder={'search for products...'}onChange={handleQueryChange} id="searchbar" />
