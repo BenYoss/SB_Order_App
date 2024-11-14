@@ -4,7 +4,6 @@
 
 #shopping-list-container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
 }
 
@@ -17,8 +16,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 5%;
-    margin-left: 5vw;
-    margin-right: 5vw;
+    margin: 0vw 5vw 5vw 5vw;
     padding: 0px;
 }
 

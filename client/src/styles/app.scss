@@ -1,6 +1,7 @@
 /**------------------------------------------------------------------------
  **                            APP/ROOT STYLE SHEET
  *------------------------------------------------------------------------**/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 @import 'refs.scss';
 
@@ -21,6 +22,7 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    font-family: "Open Sans", sans-serif;
 }
 
 label {
@@ -30,6 +32,4 @@ label {
     }
 }
 
-input {
-    
-}
+

@@ -10,6 +10,7 @@
 #shopping-cart-header{
     background-color: map-get($primary-colors, 'component-bg');
     margin-top: 4vh;
+    padding-left: 2vw;
 }
 
 #shopping-cart-body {
@@ -64,6 +65,10 @@
     background-color: red;
     cursor: pointer;
     align-items: center;
+    color: map-get($primary-colors,'component-text');
+    border: 0;
+    border-radius: 20px;
+    transition: 0.4s;
 }
 
 .delete-cart-item:hover {

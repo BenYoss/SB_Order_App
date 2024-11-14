@@ -1,6 +1,10 @@
 /**------------------------------------------------------------------------
  **                            HOMEPAGE STYLES
  *------------------------------------------------------------------------**/
+#homepage-container {
+    display: flex;
+    flex-direction: column;
+}
 
 #homepage-header {
     display: flex;
