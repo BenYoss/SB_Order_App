@@ -9,6 +9,10 @@ import Toolbar from './toolbar/Toolbar';
 import { getProductByID, getColorsOfProduct, getUserInfo, addProductToCart } from '../helpers/apiHelpers'; 
 import Footer from './toolbar/Footer';
 
+import Modal from './styleComponents/Modal';
+
+import {AnimatePresence, motion} from 'framer-motion';
+
 interface ShoppingItemProps {
     session: string | null
 }
@@ -26,6 +30,12 @@ interface ShoppingItemProduct {
     last_modified: string,
 }
 
+interface AddedInterface {
+    addedName: string
+    addedDescription: String
+    addedType: string
+}
+
 const ShoppingItem: React.FC<ShoppingItemProps> = ({ session }) => {
     const [product, setProduct] = useState<ShoppingItemProduct>({
         id: '',
@@ -40,7 +50,26 @@ const ShoppingItem: React.FC<ShoppingItemProps> = ({ session }) => {
         last_modified: ''
     });
 
+    const [added, setAdded] = useState<AddedInterface>({
+        addedName: '',
+        addedDescription: '',
+        addedType: ''
+    });
+
+    const [exited, setExited] = useState<boolean>(false);
+
     const [productColors, setProductColors] = useState<ShoppingItemProduct[]>([]);
+    
+    useEffect(() => {
+        if (exited) {
+            setExited(false);
+            setAdded({
+                addedName: '',
+                addedDescription: '',
+                addedType: ''
+            });
+        }
+    });
 
 
     useEffect(() => {
@@ -78,8 +107,14 @@ const ShoppingItem: React.FC<ShoppingItemProps> = ({ session }) => {
     const handleCartAdd = async () => {
         if (session) {
             const user = await getUserInfo(session).catch(err => console.error(err));
-    
+
             await addProductToCart(user.id, product.id).catch(err => console.error(err));
+
+            setAdded({
+                addedName: 'Item Added to Cart!',
+                addedDescription: `Item ${product.product_name} has been added to your cart.`,
+                addedType: 'Info'
+            });
         } else {
             console.error("Error:✴ Session was undefined.");
         }
@@ -88,11 +123,30 @@ const ShoppingItem: React.FC<ShoppingItemProps> = ({ session }) => {
     return (
         <>
             <Toolbar session={session} />
+            <AnimatePresence>
+                {
+                    added.addedDescription.length && !exited ? (
+                        <Modal 
+                        title={added.addedName}
+                        variant="info"
+                        body={{
+                            header: null,
+                            text: `${added.addedDescription}`,
+                            buttonRoute: null,
+                            inputRequired: false,
+                            inputHandler: null,
+                            inputResult: false,
+                        }}
+                        setExited={setExited}
+                        />
+                    ) : null
+                }
+            </AnimatePresence>
             <div id="shopping-item-container" className='page small'>
                 
                 <div id="shopping-item-header">
                     <div id="shopping-item-header-image">
-                        <img src={product.product_image_url} alt="Product icon" id="shopping-item-icon" />
+                        <img src={product.product_image_url} referrerPolicy="no-referrer" alt="Product icon" id="shopping-item-icon" />
                     </div>
                     <div id="shopping-item-header-block">
                         <h1 className="hdr medium" id="shopping-item-header-text">

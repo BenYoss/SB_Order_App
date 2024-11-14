@@ -29,17 +29,17 @@ const TransactionForm: React.FC<TransactionFormInterface> = ({ setTransactionFor
             <div id="transaction-form-body">
                 <div className="form-element">
                     <label htmlFor="" className="label-light" id="card_number_label">Card Number:</label>
-                    <input type="text" onChange={handleTransactionChange} id="card_number" />
+                    <input type="text"  className="form-input large" onChange={handleTransactionChange} id="card_number" />
                 </div>
                 
                 <div className="form-element">
                     <label htmlFor="" className="label-light" id="address">Card Type:</label>
-                    <input type="text" onChange={handleTransactionChange} id="type" />
+                    <input type="text" className="form-input large"  onChange={handleTransactionChange} id="type" />
                 </div>
                 
                 <div className="form-element">
                     <label htmlFor="" className="label-light" id="exp_date_label">Expiry:</label>
-                    <input type="text" onChange={handleTransactionChange} id="exp_date" />
+                    <input type="text" className="form-input large"  onChange={handleTransactionChange} id="exp_date" />
                 </div>
             </div>
         </div>

@@ -46,14 +46,9 @@ const ShoppingList: React.FC<ShoppingListProps> = ({ session }) => {
     }, [pageNumber]);
 
     return (
-        <div id="shopping-list-container">
+        <div id="shopping-list-container" className="page">
             <Toolbar session={session} />
-            
-            <div id="shopping-list-header">
-                <h1 className="hdr large" id="shopping-list-header-text">
-                    Shopping List
-                </h1>
-            </div>
+        
             <div id="shopping-list-body">
                 <h1 className="page-number">Page number {pageNumber - 1}</h1>
                 <div className="shopping-list">
