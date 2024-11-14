@@ -40,8 +40,6 @@ export default function Registry() {
 
 
     useEffect(() => {
-
-        console.log(exited);
         if (exited) {
             setExited(false);
             setError({

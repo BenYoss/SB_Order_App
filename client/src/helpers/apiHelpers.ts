@@ -113,6 +113,7 @@ export async function createPaymentInfo(userID: string, cardNumber: string, expi
         }
     )
     .then(({data}) => {
+        console.log(data)
         return data.data;
     })
     .catch((err) => console.error(err));
@@ -121,12 +122,12 @@ export async function createPaymentInfo(userID: string, cardNumber: string, expi
 export async function createTransaction(paymentID: string, shippingAddress: string, shippingCity: string, shippingState: string, shippingZip: string, taxRate = 1.2) {
     return await axios.post('/api/create_transaction',
         {
-            paymentID: paymentID,
-            shippingAddress: shippingAddress,
-            shippingCity: shippingCity,
-            shippingState: shippingState,
-            shippingZip: shippingZip,
-            taxRate: taxRate
+            payment_id: paymentID,
+            shipping_address: shippingAddress,
+            shipping_city: shippingCity,
+            shipping_state: shippingState,
+            shipping_zip: shippingZip,
+            tax_rate: taxRate
         }
     )
     .then(({data}) => {
@@ -148,6 +149,51 @@ export async function createTransactionProduct(transactionID: string, productID:
     }).catch((err) => console.error(err));
 }
 
+export async function sendVerificationCode(email: string) {
+    await axios.post('/api/verify_email',
+        {email: email}
+    ).catch((err) => console.error(err));
+}
+
+export async function validateVerificationCode(code: string) {
+    return axios.post('/api/verify_email/confirm',
+        {verifyCode: code}
+    ).then(({ data }) => {
+        return data.data;
+    }).catch((err) => console.error(err));
+}
+
+export async function logout() {
+    return axios.delete('/api/logout')
+    .then(() => {
+        document.cookie = ';';
+        window.location.href = '/login';
+    }).catch(err => console.error(err));
+}
+
+export async function updatePassword(username: string, newPassword: string) {
+    return axios.put('api/credential',
+        {
+            username: username,
+            newPassword: newPassword
+        }
+    ).catch((err) => console.error(err));
+}
+
+let productCategories: string[] = [];
+
+export async function getProductCategories() {
+    
+    if (productCategories.length == 0) {
+        return axios.get('api/store_product_categories')
+        .then(({data}) => {
+            productCategories = data.data;
+            return productCategories;
+        }).catch(err => console.error(err));
+    } 
+    return productCategories;
+}
+
 module.exports = {
     createUser,
     decryptPassword,
@@ -161,5 +207,10 @@ module.exports = {
     deleteCartItem,
     createTransaction,
     createTransactionProduct,
-    createPaymentInfo
+    createPaymentInfo,
+    validateVerificationCode,
+    sendVerificationCode,
+    logout,
+    updatePassword,
+    getProductCategories
 }

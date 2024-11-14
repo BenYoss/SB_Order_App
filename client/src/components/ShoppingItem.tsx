@@ -94,12 +94,6 @@ const ShoppingItem: React.FC<ShoppingItemProps> = ({ session }) => {
         }
     }, [product.product_name]);
 
-    useEffect(() => {
-        for (let i = 0; i < productColors.length; i++) {
-            console.log(productColors[i].product_color, product.product_color);
-        }
-    }, [productColors]);
-
     const handleRedirect = (id: string) => {
         window.location.href = `/item?id=${id}`;
     }
