@@ -91,3 +91,23 @@ func (h *CredentialHandler) GetCredentialByUsername(context *fiber.Ctx) error {
 
 	return nil
 }
+
+func (h *CredentialHandler) UpdateCredentialByUsername(context *fiber.Ctx) error {
+	var credentialBody models.CredentialUpdateBody
+
+	if err := context.BodyParser(&credentialBody); err != nil {
+		context.Status(http.StatusBadRequest).JSON(
+			&fiber.Map{"message": "Bad request, body params not matching."})
+		return nil
+	}
+	if err := h.Repo.UpdatePassword(credentialBody.Username, credentialBody.NewPassword); err != nil {
+		context.Status(http.StatusBadRequest).JSON(
+			&fiber.Map{"message": "Bad request, database request failed."})
+		return nil
+	}
+
+	context.Status(http.StatusAccepted).JSON(
+		&fiber.Map{"message": "Password has been updated."})
+
+	return nil
+}
