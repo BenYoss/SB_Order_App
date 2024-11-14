@@ -56,7 +56,7 @@ func (h *UserHandler) GetUser(context *fiber.Ctx) error {
 
 func (h *UserHandler) DeleteUser(context *fiber.Ctx) error {
 
-	id := context.Params("id") //! TODO: Check id type and text to prevent injection.
+	id := context.Params("id")
 
 	if id == "" {
 		context.Status(http.StatusInternalServerError).JSON(&fiber.Map{
@@ -121,5 +121,24 @@ func (h *UserHandler) GetUserByID(context *fiber.Ctx) error {
 			"data":    &user,
 		})
 
+	return nil
+}
+
+func (h *UserHandler) LogOut(context *fiber.Ctx) error {
+
+	store := storage.GetStorage()
+	sess, err := store.Get(context)
+
+	if err != nil {
+		context.Status(http.StatusUnauthorized).JSON(
+			&fiber.Map{"message": "Invalid session."})
+		return err
+	}
+	var err2 error = sess.Destroy()
+	if err2 != nil {
+		context.Status(http.StatusUnauthorized).JSON(
+			&fiber.Map{"message": "Invalid session."})
+		return err2
+	}
 	return nil
 }
