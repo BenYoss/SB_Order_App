@@ -39,6 +39,7 @@ func main() {
 		DB: db,
 	}
 
+	// Database handlers organized by entity.
 	storeProductHandler := &routes.StoreProductHandler{Repo: r}
 	userHandler := &routes.UserHandler{Repo: r}
 	storeCartHandler := &routes.StoreCartHander{Repo: r}
@@ -46,10 +47,14 @@ func main() {
 	transactionHandler := &routes.TransactionHandler{Repo: r}
 	transactionProductHandler := &routes.TransactionProductHandler{Repo: r}
 	credentialHandler := &routes.CredentialHandler{Repo: r}
+
+	// Email verification handler
+
+	verifyEmailHandler := &routes.VerifyEmailHandler{Repo: r}
+
 	app.Static("/", "../client/dist")
 
 	api := app.Group("/api")
-	//! TODO: Add additional routes for each entity in DB following CRUD.
 
 	//* STORE PRODUCT ROUTES
 	api.Post("/create_store_product", storeProductHandler.CreateStoreProduct)
@@ -58,6 +63,7 @@ func main() {
 	api.Get("/store_product/:number", storeProductHandler.GetStoreProducts)
 	api.Get("/store_product_search", storeProductHandler.GetStoreProductsAdvanced)
 	api.Get("/store_product_colors/:id", storeProductHandler.GetStoreProductColors)
+	api.Get("/store_product_categories", storeProductHandler.GetProductCategories)
 
 	//* USER ROUTES
 	api.Post("/create_user", userHandler.CreateUser)
@@ -92,8 +98,15 @@ func main() {
 	//* CREDENTIAL ROUTES
 	api.Get("/get_credential/:id", credentialHandler.GetCredentialByUsername)
 	api.Get("/credential", credentialHandler.GetCredential)
+	api.Put("/credential", credentialHandler.UpdateCredentialByUsername)
 
-	//! TODO: Prevent directory traversal.
+	//* EMAIL VERIFY ROUTE
+	api.Post("/verify_email", verifyEmailHandler.SendEmailVerification)
+	api.Post("/verify_email/confirm", verifyEmailHandler.VerifyEmail)
+
+	//* SESSION LOG OUT
+	api.Delete("/logout", userHandler.LogOut)
+
 	app.Get("/*", func(context *fiber.Ctx) error {
 		return context.SendFile(filepath.Join("../client/dist", "index.html"))
 	})
