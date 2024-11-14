@@ -113,7 +113,7 @@ export async function createPaymentInfo(userID: string, cardNumber: string, expi
         }
     )
     .then(({data}) => {
-        console.log(data)
+
         return data.data;
     })
     .catch((err) => console.error(err));
